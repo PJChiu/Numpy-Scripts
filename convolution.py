@@ -18,12 +18,12 @@ def conv_2d(x, k):
     i0 = np.repeat(np.arange(KH), KW)
     i1 = np.repeat(np.arange(H_out), W_out)
     i = i0.reshape(-1, 1) + i1.reshape(1, -1)
-    print(i)
+    # print(i)
 
     j0 = np.tile(np.arange(KW), KH)
     j1 = np.tile(np.arange(W_out), H_out)
     j = j0.reshape(-1, 1) + j1.reshape(1, -1)
-    print(j)
+    # print(j)
 
     x_crop = x[i, j]
 
@@ -35,12 +35,17 @@ def conv_2d(x, k):
     return output
 
 
-x1 = np.arange(1, 26, 1).reshape([5, 5])
+def back_propagation_2d(x,k,grad):
+    pass
 
+
+x1 = np.arange(1, 17, 1).reshape([4, 4])
 k1 = np.arange(1, 5, 1).reshape([2, 2])
 
-
-# print(conv_2d(x1,k1))
+res_conv2d = conv_2d(x1, k1)
+grad = np.ones_like(res_conv2d)
+back_propagation_2d(x1,k1,grad)
+print(x1,k1,grad)
 
 
 def conv_3d(x, k):
@@ -74,10 +79,10 @@ def conv_3d(x, k):
     return output.reshape([B, C2, H_out, W_out])
 
 
-x2 = np.arange(1, 49, 1).reshape([1, 3, 4, 4])
-k2 = np.arange(1, 25, 1).reshape([2, 3, 2, 2])
+# x2 = np.arange(1, 49, 1).reshape([1, 3, 4, 4])
+# k2 = np.arange(1, 25, 1).reshape([2, 3, 2, 2])
 
-res = conv_3d(x2, k2)
+# res = conv_3d(x2, k2)
 
 
 # print(res.shape)
@@ -109,12 +114,12 @@ def back_propagation(x, k, grad):
     pass
 
 
-x3 = x2.transpose(0, 2, 3, 1)
-k3 = k2.transpose(2, 3, 1, 0)
-grad = np.ones_like(res).transpose(0, 2, 3, 1)
+# x3 = x2.transpose(0, 2, 3, 1)
+# k3 = k2.transpose(2, 3, 1, 0)
+# grad = np.ones_like(res).transpose(0, 2, 3, 1)
 
 # print(x3.shape, k3.shape, grad.shape)
-x_grad_baseline, k_grad_baseline = back_propagation_baseline(x3, k3, grad)
-print(x_grad_baseline.shape)
-print('*' * 20)
-print(k_grad_baseline.shape)
+# x_grad_baseline, k_grad_baseline = back_propagation_baseline(x3, k3, grad)
+# print(x_grad_baseline.shape)
+# print('*' * 20)
+# print(k_grad_baseline.shape)
